@@ -1,3 +1,9 @@
 <Solution>
+  <Project Path="Audit.Worker/Audit.Worker.csproj" />
+  <Project Path="CourseCapacity.Service/CourseCapacity.Service.csproj" />
+  <Project Path="CourseCapacity.Tests/CourseCapacity.Tests.csproj" />
+  <Project Path="Notification.Service/Notification.Service.csproj" />
   <Project Path="Registration.API/Registration.API.csproj" />
+  <Project Path="Registration.Tests/Registration.Tests.csproj" />
+  <Project Path="Shared.Contracts/Shared.Contracts.csproj" />
 </Solution>
