@@ -1,0 +1,30 @@
+services:
+  rabbitmq:
+    # RabbitMQ with the Management UI enabled.
+    image: rabbitmq:4-management
+    container_name: course-registration-rabbitmq
+    hostname: rabbitmq
+    ports:
+      # AMQP port used by applications to connect to RabbitMQ.
+      - "5672:5672"
+      # Web-based RabbitMQ Management UI.
+      - "15672:15672"
+    environment:
+      # These defaults are for local development only; override them as needed.
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER:-localdev}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS:-localdev-password}
+    volumes:
+      # Persist RabbitMQ data across container restarts and recreation.
+      - rabbitmq_data:/var/lib/rabbitmq
+    restart: unless-stopped
+    healthcheck:
+      # Check that RabbitMQ's node is running and responding.
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  # Docker manages this named volume for persistent RabbitMQ data.
+  rabbitmq_data:
